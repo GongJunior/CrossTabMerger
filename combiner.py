@@ -22,9 +22,8 @@ for filename in os.listdir(pathVar):
 		print('%s added to list' %(filename))
 
 
-# In[ ]:
 
-#create data framme for each file
+#create data frame for each file
 #combine dataframes into one
 start = startrow -1
 frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet) for f in fileList ]
@@ -32,9 +31,7 @@ frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet)
 number = len(fileList)
 
 
-# In[ ]:
-
-#print('Combining %s files, please be patient :)' %(number))
+print('Combining %s files, please be patient :)' %(number))
 result = pd.concat(frames)
 del frames
 #print combined dataframes into one exceel sheet
