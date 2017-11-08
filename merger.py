@@ -4,6 +4,7 @@
 
 import os
 #temp solution to find necessary combiner module
+#find dynamic solution for sharing
 fudge = r'c:\python\merger'
 os.chdir(fudge)
 import combiner
@@ -15,10 +16,7 @@ path = input()
 print('Enter number of row for headers in files...')
 rowNum = int(input())
 
-print('Please enter name of sheet in files...')
+print('Please enter name of sheet in files...') #update to take sheet location in addition to name
 sheet = input()
 
 combiner.excel_mix(pathVar = path,startrow = rowNum,sheet = sheet)
-
-
-#import combiner
