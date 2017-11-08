@@ -1,4 +1,8 @@
-def excel_mix(pathVar,startrow,sheet):
+#make better notes
+#add help notes
+#future - add function for worksheet
+
+def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	import pandas as pd
 	import os
 
@@ -35,8 +39,3 @@ def excel_mix(pathVar,startrow,sheet):
 	del result
 	print('Done!')
 
-# futures update for taking worksheets as well as workbooks
-# filename = '2017_July_GSS.xlsx'
-# sheetList = ['IND Hyderabad','IND Bangalore','IND','IRL Dublin','IRL','DEU','DEU Dusseldorf','BRA','BRA Sao Paulo','AUS','AUS Sydney','CAN','CAN Toronto','JPN','JPN Tokyo','US, SW and Revenue Cut','US National','US Phoenix','US Seattle','US NY Metro','US SF Bay','US Austin','UK National'
-# ]
-# 
