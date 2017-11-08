@@ -1,13 +1,10 @@
-#! python3
-# coding: utf-8
-
 def excel_mix(pathVar,startrow,sheet):
 	import pandas as pd
 	import os
 
 	#variables to take from user input
 	#pathVar = r'' #path to file(s)
-	#extVar = '.xlsx'#update to all crosstab variations
+	#extVar = '.xls'#update to all crosstab variations
 	#startrow = 10 #what row to start collecting data, 0 is default
 	#sheet = 'Compensation Data' #0 = default
 	resultFile = 'result.xlsx' #name of file to be created
@@ -37,7 +34,6 @@ def excel_mix(pathVar,startrow,sheet):
 	result.to_excel(os.path.join(pathVar,resultFile),sheet_name='ALLINFO',index=False)
 	del result
 	print('Done!')
-	os.system("pause")
 
 # futures update for taking worksheets as well as workbooks
 # filename = '2017_July_GSS.xlsx'
