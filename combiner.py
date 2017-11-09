@@ -20,17 +20,24 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 		if filename.endswith('.xlsx') or filename.endswith('.xls'):
 			fileList.append(filename)
 			print('%s added to list' %(filename))
-
-
-
+			option = 'excel'
+		elif filename.endswith('.csv'):
+			fileList.append(filename)
+			print('%s added to list' %(filename))
+			option ='csv'
+	#print error if result.xlsx already exists in fileList
+	
 	#create data frame for each file
 	#combine dataframes into one
 	start = startrow -1
-	frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet) for f in fileList ]
-	#frames = [ pd.read_csv(os.path.join(pathVar,f),encoding='cp1252') for f in fileList ]
+	if option == 'excel':
+		frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet) for f in fileList ]
+	elif option == 'csv':
+		frames = [ pd.read_csv(os.path.join(pathVar,f),encoding='cp1252') for f in fileList ]
+	else:
+		print('Invalid file type!')
+	
 	number = len(fileList)
-
-
 	print('Combining %s files, please be patient :)' %(number))
 	result = pd.concat(frames)
 	del frames
