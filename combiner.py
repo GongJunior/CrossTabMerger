@@ -17,6 +17,7 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	#build list of files to combine
 	print('Gathering files...')
 	fileList = []
+	option = 'none'
 	for filename in os.listdir(pathVar):
 		if filename.lower().endswith('.xlsx') or filename.lower().endswith('.xls'):
 			fileList.append(filename)
