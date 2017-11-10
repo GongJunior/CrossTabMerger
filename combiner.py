@@ -12,16 +12,17 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	#startrow = 10 #what row to start collecting data, 0 is default
 	#sheet = 'Compensation Data' #0 = default
 	resultFile = 'result.xlsx' #name of file to be created
+	
 
 	#build list of files to combine
 	print('Gathering files...')
 	fileList = []
 	for filename in os.listdir(pathVar):
-		if filename.endswith('.xlsx') or filename.endswith('.xls'):
+		if filename.lower().endswith('.xlsx') or filename.lower().endswith('.xls'):
 			fileList.append(filename)
 			print('%s added to list' %(filename))
 			option = 'excel'
-		elif filename.endswith('.csv'):
+		elif filename.lower().endswith('.csv'):
 			fileList.append(filename)
 			print('%s added to list' %(filename))
 			option ='csv'
