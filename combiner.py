@@ -17,7 +17,6 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	#build list of files to combine
 	print('Gathering files...')
 	fileList = []
-	option = 'none'
 	for filename in os.listdir(pathVar):
 		if filename.lower().endswith('.xlsx') or filename.lower().endswith('.xls'):
 			fileList.append(filename)
@@ -34,7 +33,7 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	start = startrow -1
 	if option == 'excel':
 		frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet) for f in fileList ]
-	elif option == 'csv':
+	elif option == 'csv': #give startrow option for csv
 		frames = [ pd.read_csv(os.path.join(pathVar,f),encoding='cp1252') for f in fileList ]
 	else:
 		print('Invalid file type!')
@@ -48,3 +47,39 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	del result
 	print('Done!')
 
+def sheet_list (path,file): #gathers list of sheets from file
+	from openpyxl import load_workbook
+	import os
+	#load file
+	wb = load_workbook(os.path.join(path,file))
+	#get list of sheet names
+	sheet_list = wb.get_sheet_names()
+	#return list of sheets
+	return sheet_list
+
+
+def sheet_mix(pathVar,file,startrow,sheetList): #function for excel sheets
+	import pandas as pd
+	import os
+
+	#variables to take from user input
+	#pathVar = r'' #path to file(s)
+	#extVar = '.xls'#update to all crosstab variations
+	#startrow = 10 #what row to start collecting data, 0 is default
+	#sheet = 'Compensation Data' #0 = default
+	resultFile = 'result.xlsx' #name of file to be created
+	
+	
+	#create data frame for each file
+	#combine dataframes into one
+	start = startrow -1
+	frames = [ pd.read_excel(os.path.join(pathVar,file),skiprows=start,sheetname=sheet) for sheet in sheetList ]
+	
+	number = len(sheetList)
+	print('Combining %s files, please be patient :)' %(number))
+	result = pd.concat(frames)
+	del frames
+	#print combined dataframes into one exceel sheet
+	result.to_excel(os.path.join(pathVar,resultFile),sheet_name='ALLINFO',index=False)
+	del result
+	print('Done!')
