@@ -2,6 +2,15 @@
 #add help notes
 #future - add function for worksheet
 
+def addTag(file,path,r,s):
+	import pandas as pd
+	import os
+
+	tempFrame = pd.read_excel(os.path.join(path,file),skiprows=r,sheetname=s)
+	tempFrame['tag'] = str(file)
+	tempFrame['sheet'] = str(s)
+	return tempFrame
+
 def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	import pandas as pd
 	import os
@@ -32,7 +41,7 @@ def excel_mix(pathVar,startrow,sheet): #function for excel workbooks
 	#combine dataframes into one
 	start = startrow -1
 	if option == 'excel':
-		frames = [ pd.read_excel(os.path.join(pathVar,f),skiprows=start,sheetname=sheet) for f in fileList ]
+		frames = [ addTag(f,pathVar,start,sheet) for f in fileList ]
 	elif option == 'csv': #give startrow option for csv
 		frames = [ pd.read_csv(os.path.join(pathVar,f),encoding='cp1252') for f in fileList ]
 	else:
@@ -73,7 +82,7 @@ def sheet_mix(pathVar,file,startrow,sheetList): #function for excel sheets
 	#create data frame for each file
 	#combine dataframes into one
 	start = startrow -1
-	frames = [ pd.read_excel(os.path.join(pathVar,file),skiprows=start,sheetname=sheet) for sheet in sheetList ]
+	frames = [ addTag(file,pathVar,start,sheet) for sheet in sheetList ]
 	
 	number = len(sheetList)
 	print('Combining %s files, please be patient :)' %(number))
